@@ -17,7 +17,7 @@ setup_args = dict(
     author='Tuandv',
     author_email='tuan.dv@teko.vn',
     keywords=['email', 'Email', 'SendEmail', 'Send Email', 'send email'],
-    url='',
+    url='https://github.com/dotuan0601/tkemail',
     download_url='https://pypi.org/project/tkmail/'
 )
 
