@@ -8,13 +8,13 @@ with open('HISTORY.md') as history_file:
 
 setup_args = dict(
     name='tkmail',
-    version='0.1.1',
+    version='0.1.2',
     description='Send email with smtp setup',
     long_description_content_type="text/markdown",
     long_description=README + '\n\n' + HISTORY,
     license='MIT',
     packages=find_packages(),
-    author='Tuandv',
+    author='tuan.dv',
     author_email='tuan.dv@teko.vn',
     keywords=['email', 'Email', 'SendEmail', 'Send Email', 'send email'],
     url='https://github.com/dotuan0601/tkemail',
