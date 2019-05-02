@@ -71,7 +71,7 @@ class Email():
         retry_number = 0
         is_success = False
         error_msg = ""
-        while(retry_number < allow_retry_number or not is_success):
+        while(retry_number < allow_retry_number and not is_success):
             try:
                 s = smtplib.SMTP(self.smtp_name, self.smtp_port)
                 is_success = True
