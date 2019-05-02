@@ -33,7 +33,7 @@ class Email():
             if not email_info:
                 raise ValueError('Please fill all from_address, to_address, subject and content')
 
-    def send_mail(self, from_address, to, subject, content, cc=None, bcc=None, format_content='html'):
+    def send_mail(self, from_address, to, subject, content, cc=None, bcc=None, format_content='html', allow_retry_number=5):
         # validate params which required
         self.check_require_info(from_address, to, subject, content)
 
@@ -68,10 +68,23 @@ class Email():
         # setup smtp and send mail
         print(self.smtp_name)
         print(self.smtp_port)
-        s = smtplib.SMTP(self.smtp_name, self.smtp_port)
-        s.ehlo()
-        s.starttls()
-        s.ehlo()
-        s.login(self.login_name, self.login_pwd)
-        s.sendmail(from_address, rcpt, msg.as_string())
-        s.quit()
+        retry_number = 0
+        is_success = False
+        error_msg = ""
+        while(retry_number < allow_retry_number or not is_success):
+            try:
+                s = smtplib.SMTP(self.smtp_name, self.smtp_port)
+                is_success = True
+            except Exception as e:
+                error_msg = str(e)
+                retry_number += 1
+           
+        if is_success:  
+            s.ehlo()
+            s.starttls()
+            s.ehlo()
+            s.login(self.login_name, self.login_pwd)
+            s.sendmail(from_address, rcpt, msg.as_string())
+            s.quit()
+        else:
+            print("send mail failed because of {}".format(error_msg))
